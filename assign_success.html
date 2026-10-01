@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .success-container {
+            background: rgba(255,255,255,0.06);
+            padding: 45px;
+            border-radius: 18px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+            text-align: center;
+            width: 360px;
+            backdrop-filter: blur(18px);
+            transform: perspective(1000px) rotateX(5deg);
+            transition: 0.3s;
+        }
+
+        .success-container:hover {
+            transform: perspective(1000px) rotateX(0deg) scale(1.03);
+        }
+
+        h2 {
+            color: #00e676;
+            margin-bottom: 25px;
+            font-size: 24px;
+            text-shadow: 0 0 10px #00e676;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #00e6e6, #0072ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.9);
+        }
+    </style>
+</head>
+<body>
+
+<div class="success-container">
+    <h2>✅ Quiz Assigned Successfully</h2>
+
+    <a href="/admin" class="btn">Go to Dashboard</a>
+</div>
+
+</body>
+</html>
+

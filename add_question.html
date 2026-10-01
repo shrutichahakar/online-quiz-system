@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Question</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>Add Question</h2>
+
+<form method="POST">
+    <input type="text" name="q" placeholder="Question">
+    <input type="text" name="o1" placeholder="Option 1">
+    <input type="text" name="o2" placeholder="Option 2">
+    <input type="text" name="o3" placeholder="Option 3">
+    <input type="text" name="o4" placeholder="Option 4">
+    <input type="text" name="ans" placeholder="Correct Answer">
+    <button type="submit">Add</button>
+</form>
+
+</body>
+</html> 

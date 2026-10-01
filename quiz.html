@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #020617, #0f172a);
+            color: #fff;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 
+                10px 10px 40px rgba(0,0,0,0.7),
+                -5px -5px 20px rgba(255,255,255,0.05);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        #timer {
+            color: #22c55e;
+            font-size: 26px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #22c55e, 0 0 20px #22c55e;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 18px;
+            border-radius: 15px;
+            background: #0f172a;
+            box-shadow: 
+                inset 6px 6px 12px #020617,
+                inset -6px -6px 12px #1e293b;
+            transition: 0.3s;
+        }
+
+        .question:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px #38bdf8;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        label:hover {
+            background: #1e293b;
+            transform: translateX(5px);
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #22c55e, #16a34a);
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+            box-shadow: 
+                6px 6px 15px #020617,
+                -6px -6px 15px #1e293b;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px #22c55e;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<form method="POST" id="quizForm">
+
+<h2>⏱ Time Left: <span id="timer"></span></h2>
+
+{% for q in questions %}
+    <div class="question">
+        <p><b>{{ loop.index }}. {{ q[1] }}</b></p>
+
+        <label>
+            <input type="radio" name="{{ q[0] }}" value="1"> {{ q[2] }}
+        </label>
+
+        <label>
+            <input type="radio" name="{{ q[0] }}" value="2"> {{ q[3] }}
+        </label>
+
+        <label>
+            <input type="radio" name="{{ q[0] }}" value="3"> {{ q[4] }}
+        </label>
+
+        <label>
+            <input type="radio" name="{{ q[0] }}" value="4"> {{ q[5] }}
+        </label>
+    </div>
+{% endfor %}
+
+<button type="submit">Submit Quiz</button>
+
+</form>
+
+</div>
+
+<script>
+let time = {{ time }} * 60;
+
+let timer = setInterval(function () {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    document.getElementById("timer").innerHTML =
+        minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+
+    time--;
+
+    if (time < 0) {
+        clearInterval(timer);
+        alert("Time's up!");
+        document.getElementById("quizForm").submit();
+    }
+}, 1000);
+</script>
+
+</body>
+</html>

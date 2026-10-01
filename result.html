@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Result</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #ffffff;
+        }
+
+        /* 3D Dark Container */
+        .container {
+            text-align: center;
+            background: rgba(255,255,255,0.05);
+            padding: 35px 40px;
+            border-radius: 15px;
+            width: 400px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            transform: perspective(1000px) rotateX(5deg);
+            transition: 0.3s;
+        }
+
+        .container:hover {
+            transform: perspective(1000px) rotateX(0deg) scale(1.05);
+        }
+
+        h2 {
+            color: #00ff99;
+            text-shadow: 0 0 10px #00ff99;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #dddddd;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 6px 0;
+            color: #ffffff;
+        }
+
+        .score {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #00e6e6;
+            text-shadow: 0 0 10px #00e6e6;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 18px;
+            text-decoration: none;
+            background: linear-gradient(45deg, #00e6e6, #0072ff);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            transition: 0.3s;
+        }
+
+        a:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Quiz Submitted Successfully ✅</h2>
+
+    <p><strong>Name:</strong> {{ name }}</p>
+   
+    <div class="score">
+        Score: {{ score }} / {{ total }}
+    </div>
+
+    <a href="/">Go Home</a>
+</div>
+
+</body>
+</html>

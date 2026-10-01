@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assign Quiz</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            padding: 20px;
+            color: #ffffff; /* bright white */
+        }
+
+        .card {
+            background: rgba(255,255,255,0.06);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            width: 420px;
+            margin: auto;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            transform: perspective(1000px) rotateX(5deg);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: perspective(1000px) rotateX(0deg) scale(1.02);
+        }
+
+        input {
+            width: 85%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255,255,255,0.12);
+            color: #ffffff;
+            font-size: 16px;
+            box-shadow: inset 0 4px 8px rgba(0,0,0,0.6);
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #cccccc;
+        }
+
+        input:focus {
+            box-shadow: 0 0 10px #ffffff;
+        }
+
+        .row {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 14px;
+            margin: 6px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .add-btn {
+            background: linear-gradient(45deg, #00e676, #00c853);
+            color: white;
+        }
+
+        .more-btn {
+            background: linear-gradient(45deg, #00e6e6, #0072ff);
+            color: white;
+        }
+
+        .assign-btn {
+            background: linear-gradient(45deg, #6c5ce7, #00cec9);
+            color: white;
+            padding: 12px 20px;
+        }
+
+        .edit-btn {
+            background: linear-gradient(45deg, #ffc107, #ff9800);
+            color: #000;
+        }
+
+        .delete-btn {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+        }
+
+        table {
+            width: 85%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #ffffff;
+        }
+
+        th {
+            background: linear-gradient(45deg, #00e6e6, #0072ff);
+        }
+
+        .assign-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+
+    <script>
+        function addRow() {
+            let container = document.getElementById("student-fields");
+
+            let div = document.createElement("div");
+            div.className = "row";
+
+            div.innerHTML = `
+                <input type="text" name="name[]" placeholder="Student Name" required>
+                <input type="text" name="seatno[]" placeholder="Seat No" required>
+            `;
+
+            container.appendChild(div);
+        }
+    </script>
+</head>
+<body>
+
+<div class="card">
+    <h3>Add Students</h3>
+
+    <form action="/add_student" method="POST">
+
+        <div id="student-fields">
+            <div class="row">
+                <input type="text" name="name[]" placeholder="Student Name" required>
+                <input type="text" name="seatno[]" placeholder="Seat No" required>
+            </div>
+        </div>
+
+        <button type="button" onclick="addRow()" class="more-btn">+ Add More</button><br>
+
+        <button type="submit" class="add-btn">Add All Students</button>
+    </form>
+</div>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Seat No</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for s in students %}
+    <tr>
+        <td>{{ s[1] }}</td>
+        <td>{{ s[2] }}</td>
+        <td>
+            <a href="/edit_student/{{ s[0] }}">
+                <button class="edit-btn">Edit</button>
+            </a>
+
+            <form action="/delete_student/{{ s[0] }}" method="POST" style="display:inline;">
+                <button class="delete-btn">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<div class="assign-section">
+    <a href="/assign_success" class="assign-btn">Assign Quiz</a>
+</div>
+
+</body>
+</html>

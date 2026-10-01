@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top, #0f2027, #0a1218, #000000);
+            margin: 0;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        h2 {
+            text-align: center;
+            color: #00e6e6;
+            font-size: 30px;
+            text-shadow: 0 0 15px #00e6e6, 0 0 30px #0072ff;
+        }
+
+        /* TIMER BOX */
+        .timer {
+            text-align: center;
+            font-size: 22px;
+            margin: 20px;
+            padding: 10px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 0 15px rgba(0,230,230,0.3);
+        }
+
+        form {
+            width: 80%;
+            margin: auto;
+        }
+
+        .question {
+            background: rgba(255,255,255,0.05);
+            padding: 28px;
+            margin: 30px 0;
+            border-radius: 20px;
+            box-shadow: 
+                0 30px 70px rgba(0,0,0,0.9),
+                inset 0 0 20px rgba(255,255,255,0.05);
+            backdrop-filter: blur(18px);
+            transform: perspective(1200px) rotateX(6deg);
+            transition: 0.4s;
+        }
+
+        .question:hover {
+            transform: perspective(1200px) rotateX(0deg) scale(1.03);
+        }
+
+        p {
+            font-size: 20px;
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            padding: 12px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        label:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.02);
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            display: block;
+            margin: 50px auto;
+            padding: 16px 35px;
+            font-size: 20px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(45deg, #00e6e6, #0072ff);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>📝 Online Quiz</h2>
+
+<!-- TIMER -->
+<div class="timer">
+    ⏳ Time Left: <span id="timer">{{ time }}</span> seconds
+</div>
+
+<form method="POST">
+
+    {% for q in questions %}
+    <div class="question">
+
+        <p>Q{{ loop.index }}: {{ q[1] }}</p>
+
+        <label>
+            <input type="radio" name="{{ q[0] }}" value="{{ q[2] }}">
+            {{ q[2] }}
+        </label>
+
+        <label>
+            <input type="radio" name="{{ q[0] }}" value="{{ q[3] }}">
+            {{ q[3] }}
+        </label>
+
+        <label>
+            <input type="radio" name="{{ q[0] }}" value="{{ q[4] }}">
+            {{ q[4] }}
+        </label>
+
+        <label>
+            <input type="radio" name="{{ q[0] }}" value="{{ q[5] }}">
+            {{ q[5] }}
+        </label>
+
+    </div>
+    {% endfor %}
+
+    <button type="submit">Submit Quiz 🚀</button>
+
+</form>
+
+<!-- TIMER SCRIPT -->
+<script>
+    let time = {{ time }};
+
+    let timer = setInterval(function () {
+        time--;
+
+        document.getElementById("timer").innerText = time;
+
+        if (time <= 0) {
+            clearInterval(timer);
+            alert("Time is up! Quiz will be submitted.");
+            document.querySelector("form").submit();
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
